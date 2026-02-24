@@ -1,9 +1,14 @@
 ---
-name: audit-skill
-description: Perform a comprehensive, production-grade audit of any codebase (frontend + backend) AND/OR all AI system prompts used in a multi-agent pipeline. Use this skill whenever the user wants to: audit a repo, review code quality, find bugs, check accessibility, audit system prompts, review agent architecture, score prompt quality, find security issues, generate a bug report, check WCAG compliance, find performance issues, do a code review, or analyze an AI agent system. Trigger this skill even if the user only mentions "review my code", "check my prompts", "find bugs", "audit my system", "review my agents", or "what's wrong with my codebase".
+name: Audit Skill
+description: Codebase security & performance audit કરે છે.
 ---
 
-# Audit Skill
+# When to use
+
+- Security vulnerabilities check કરવા
+- Performance optimization
+
+# Instructions
 
 A comprehensive audit skill that covers two major domains:
 1. **Full Codebase Audit** — UI, bugs, accessibility, performance, security, test coverage
