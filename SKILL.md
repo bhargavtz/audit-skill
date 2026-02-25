@@ -1,11 +1,11 @@
 ---
 name: Audit Skill
-description: Codebase security & performance audit કરે છે.
+description: Performs codebase security & performance audits.
 ---
 
 # When to use
 
-- Security vulnerabilities check કરવા
+- Check for security vulnerabilities
 - Performance optimization
 
 # Instructions
