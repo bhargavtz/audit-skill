@@ -1,10 +1,12 @@
-# 🔍 audit-skill
+# audit-skill
 
-**A Claude Computer Use Skill for comprehensive codebase and AI system prompt auditing.**
+**A Claude skill for structured codebase and AI system prompt audits.**
 
-Drop this skill into your Claude setup and get production-grade audits of:
-- 🏗️ **Any codebase** — UI bugs, accessibility, performance, security, test coverage
-- 🤖 **AI system prompts** — prompt quality scoring, bottleneck analysis, structural gaps, future risk projection
+Use it to produce evidence-based reviews of:
+- **Codebases** — build/runtime behavior, UI, accessibility, performance, security, privacy, and test coverage.
+- **AI system prompts** — intent, prompt quality, bottlenecks, structural gaps, scaling risks, and durable recommendations.
+
+Every audit should distinguish observed evidence from assumptions, state limitations, redact sensitive data, and avoid applying changes without explicit approval.
 
 ---
 
@@ -56,8 +58,10 @@ cp -r audit-skill /path/to/your/skills/
 # /your-skills/
 #   audit-skill/
 #     SKILL.md
-#     references/
-#     examples/
+#     docs/
+#       references/
+#       examples/
+#       assets/
 ```
 
 Then point your Claude Computer Use setup to your skills directory.
@@ -123,21 +127,23 @@ Every audit produces:
 
 ## Skill Structure
 
-```
+```text
 audit-skill/
 ├── SKILL.md                          # Main skill file (Claude reads this)
-├── README.md                         # This file
+├── README.md                         # Project overview and usage
+├── CONTRIBUTING.md
+├── SECURITY.md
 ├── LICENSE
-├── docs/
-│   ├── references/
-│   │   ├── codebase-audit.md            # Full codebase audit instructions
-│   │   ├── prompt-audit.md              # Full system prompt audit instructions
-│   │   └── json-schema.md               # JSON output schemas
-│   ├── examples/
-│   │   ├── codebase-report.md           # Example codebase audit output
-│   │   └── prompt-report.md             # Example prompt audit output
-│   └── assets/
-│       └── trigger-eval.json            # Trigger evaluation queries
+└── docs/
+    ├── references/
+    │   ├── codebase-audit.md            # Full codebase audit instructions
+    │   ├── prompt-audit.md              # Full system prompt audit instructions
+    │   └── json-schema.md               # JSON output schemas
+    ├── examples/
+    │   ├── codebase-report.md           # Example codebase audit output
+    │   └── prompt-report.md             # Example system prompt audit output
+    └── assets/
+        └── trigger-eval.json            # Trigger evaluation queries
 ```
 
 ---
@@ -185,4 +191,4 @@ Issues and PRs welcome! See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
-MIT — see [LICENSE](LICENSE)
+No repository-wide open-source license is currently verified in this checkout. Do not assume the repository is licensed for reuse unless the maintainer confirms licensing authority and adds an appropriate license.

@@ -1,0 +1,5 @@
+# Normalize text files and keep repository diffs consistent.
+* text=auto eol=lf
+
+*.json text
+*.md text
