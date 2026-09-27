@@ -14,11 +14,11 @@
 
 ### System Intent
 **True Purpose**: Generate production-grade code from natural language requirements, validate it, and return tested, documented output.  
-**Alignment Status**: Partially Misaligned — the validator and the code generator have contradictory output format expectations, causing ~25% of requests to fail silently.
+**Alignment Status**: Partially Misaligned — the validator and the code generator have contradictory output format expectations (illustrative example; runtime rate was not measured).
 
 ### Top 5 Findings
 
-1. **Validator scores 31/100** — No output schema, contradicts generator format. Silent failures ~25% of requests.
+1. **Validator scores 31/100** — No output schema, contradicts generator format. This example does not measure a production failure rate.
 2. **No Critic/Evaluator agent** — Generated code is never reviewed for quality before delivery. Users receive unreviewed code.
 3. **Orchestrator has no failure routing** — When any agent fails, the pipeline stalls with no fallback.
 4. **Code Generator is hallucination-prone** — No constraints on fabricating APIs or libraries that don't exist.
@@ -104,9 +104,9 @@ When the validator receives JSON, it either:
 - Tries to validate the JSON string as code (wrong)
 - Silently returns "no issues" (wrong)
 
-**Current Manifestation**: ~25% of generated code is returned unvalidated because the validator fails silently.
+**Current Manifestation**: The example describes code being returned without validation; no production percentage was measured.
 
-**At Scale**: At 10× volume, this becomes ~25% of thousands of requests. As code complexity grows, the validator's freeform instructions will produce increasingly inconsistent results — some thorough reviews, some rubber-stamps.
+**At Scale**: At 10× volume, the same design flaw would expose more requests to inconsistent validation; the magnitude is not estimated here.
 
 ---
 
@@ -139,8 +139,8 @@ Do NOT fabricate test results. If you cannot assess something, say so explicitly
 
 ### Risk: Hallucination Rate Increases with Prompt Complexity
 
-**Probability**: High  
-**Timeline**: 1-3 months  
+**Probability**: Qualitative scenario rating: High
+**Timeline**: Not estimated (illustrative template; no operational history supplied)
 **Trigger**: As users send more complex, multi-file requirements
 
 **Failure Mode**: The Code Generator has no constraints on fabricating library names, API endpoints, or function signatures. As requests grow more complex, the model will increasingly invent dependencies that don't exist. Users will receive code that references `import nonexistent_library` or calls APIs that don't exist.

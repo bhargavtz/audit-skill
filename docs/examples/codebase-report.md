@@ -19,7 +19,7 @@
 
 2. **Checkout API has no CSRF protection** — Attackers can trigger purchases from malicious sites. Impact: Financial fraud. Fix: Add CSRF tokens. Est: 2 hours.
 
-3. **Product search crashes on mobile at 375px** — `overflow: hidden` on `.search-results` clips results invisibly. Impact: ~40% of users (mobile). Fix: 1 CSS rule. Est: 30 min.
+3. **Product search crashes on mobile at 375px** — `overflow: hidden` on `.search-results` clips results invisibly. Impact: illustrative example; user share was not measured. Fix: 1 CSS rule. Est: 30 min.
 
 4. **Password reset link never expires** — Reset links are valid indefinitely. Impact: Account takeover via old emails. Fix: Add 1-hour expiry. Est: 2 hours.
 

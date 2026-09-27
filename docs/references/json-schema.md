@@ -25,6 +25,8 @@ Machine-readable output schema for both audit types. Always include the full JSO
       {
         "id": "AUDIT-001",
         "severity": "Critical | High | Medium | Low",
+        "evidence_level": "A_reproduced | B_direct_static | C_strong_inference | D_hypothesis",
+        "confidence": "High | Medium | Low",
         "category": "UI | Functional | Accessibility | Performance | Security | TestCoverage",
         "title": "string",
         "description": "string",
@@ -32,19 +34,31 @@ Machine-readable output schema for both audit types. Always include the full JSO
         "line": 42,
         "reproduction_steps": ["Step 1", "Step 2"],
         "http_log": {
-          "request": "POST /api/endpoint",
-          "response": "500 {\"error\": \"message\"}"
+          "request": "redacted request summary",
+          "response": "redacted response summary"
         },
-        "code_snippet": "string",
+        "code_snippet": "redacted minimal snippet",
         "wcag_criteria": "1.4.3 (if accessibility issue)",
         "cve": "CVE-XXXX-XXXXX (if security issue)",
         "fix": {
           "description": "string",
           "diff": "string",
           "regression_test": "string"
-        }
+        },
+        "limitation": "string"
       }
     ],
+    "verification": {
+      "checks": [
+        {
+          "name": "focused regression test",
+          "baseline": "string",
+          "after_change": "string",
+          "status": "Passed | Failed | Blocked | NotApplicable",
+          "evidence": "command or artifact reference"
+        }
+      ]
+    },
     "ci_recommendations": ["string"],
     "sprint_plan": {
       "week_1": ["task1", "task2"],
@@ -117,7 +131,10 @@ Machine-readable output schema for both audit types. Always include the full JSO
       {
         "title": "string",
         "probability": "High | Medium | Low",
-        "timeline": "Immediate | 1-3 months | 3-6 months | 6+ months",
+        "timeline": "Immediate | 1-3 months | 3-6 months | 6+ months | Not estimated",
+        "confidence": "High | Medium | Low",
+        "assumptions": ["string"],
+        "validation_signal": "string",
         "trigger": "string",
         "failure_mode": "string",
         "root_cause_prompt": "string",

@@ -3,37 +3,35 @@
 **A Claude skill for structured codebase and AI system prompt audits.**
 
 Use it to produce evidence-based reviews of:
-- **Codebases** — build/runtime behavior, UI, accessibility, performance, security, privacy, and test coverage.
-- **AI system prompts** — intent, prompt quality, bottlenecks, structural gaps, scaling risks, and durable recommendations.
+- **Codebase Audit** — With a supplied repository and authorized tools, attempt builds, run tests, inspect routes/flows, review UI/accessibility/performance/security, and report what was actually tested. Browser, network, live-server, and dependency checks may be **Blocked** when the environment lacks access.
+- **System Prompt Audit** — Analyze supplied prompts and observable outputs/traces for intent, quality, bottlenecks, structural gaps, and risks. It does not request hidden reasoning or invent behavioral metrics.
 
-Every audit should distinguish observed evidence from assumptions, state limitations, redact sensitive data, and avoid applying changes without explicit approval.
+The skill produces findings and proposed remediation. It does not silently edit the target project.
 
 ---
 
 ## What It Does
 
 ### Codebase Audit
-Given a repo URL, ZIP, or pasted code, Claude will:
-- Attempt to build and run the project
-- Crawl all routes and execute critical user flows
-- Find UI layout bugs across Desktop / Tablet / Mobile viewports
-- Detect functional bugs with reproduction steps + HTTP logs
-- Run WCAG 2.1 accessibility checks
-- Identify performance bottlenecks (bundle size, LCP, FCP, etc.)
-- Find security vulnerabilities (XSS, CSRF, secrets in repo, CVEs)
-- Identify test coverage gaps and generate missing tests
-- Produce copy-paste ready code patches for every Critical/High issue
-- Generate a 2-week sprint plan
+Given a repo URL, ZIP, or pasted code, and subject to environment/access limits, the skill can:
+- Attempt authorized builds and tests in a safe environment
+- Inventory routes and execute user-approved critical flows
+- Inspect UI layout across Desktop / Tablet / Mobile viewports when browser tooling is available
+- Report functional bugs with safe reproduction steps and redacted evidence
+- Review accessibility, performance, dependencies, security/privacy and test coverage
+- Propose missing tests and patches for Critical/High issues; apply nothing silently
+- Produce a prioritized remediation plan when the evidence supports one
+
+Unavailable browser, network, credentials, dependency, or runtime checks are reported as Blocked—not passed.
 
 ### System Prompt Audit
-Given a set of AI agent system prompts, Claude will:
-- Determine the system's **true functional intent** (not just stated purpose)
-- Score every prompt out of 100 across 7 dimensions
-- Identify bottlenecks causing quality failures or silent errors
-- Find missing agent roles (Critic, Reconciler, Context Manager, etc.)
-- Project future failure risks with timelines
-- Recommend **permanent, structural fixes** (not wording tweaks)
-- Produce machine-readable JSON summary for automation
+Given a set of AI agent system prompts and, when available, observable outputs/traces, the skill can:
+- Determine stated vs. observable functional intent
+- Score prompts with evidence and limitations
+- Identify bottlenecks, missing roles, fallback gaps and schema risks
+- Project qualitative future-risk scenarios with assumptions and validation signals
+- Recommend structural fixes and produce machine-readable JSON
+- Avoid hidden-reasoning requests and invented metrics
 
 ---
 
@@ -112,16 +110,18 @@ Do a full audit of my AI-powered code generation platform:
 
 ## Output Format
 
-Every audit produces:
+Every audit produces an evidence-labeled report, not an automatic promise of a patch:
 
-| Output | Description |
+| Output | Requirement |
 |--------|-------------|
-| 📋 Executive Summary | Top 5 findings + business impact + remediation roadmap |
-| 🔧 Technical Appendix | Per-issue detail with file refs, line numbers, reproduction steps |
-| 🩹 Code Patches | Copy-paste ready diffs for Critical/High issues |
-| 🤖 CI Config | GitHub Actions workflows to prevent regressions |
-| 📅 Sprint Plan | 2-week remediation roadmap |
-| 📊 JSON Summary | Machine-readable findings for automation |
+| Executive Summary | Top findings, impact, severity, confidence, and evidence level |
+| Scope and Limitations | Target revision, tools/commands, unavailable or unauthorized checks |
+| Baseline/Verification | Before-vs-after table when files changed; Passed/Failed/Blocked status |
+| Technical Findings | Location, safe reproduction, evidence, impact, fix, regression test |
+| Remediation Plan | Containment, minimal fix, hardening, tradeoffs; do not apply silently |
+| JSON Summary | Follow `docs/references/json-schema.md`; redact sensitive data |
+
+For a file-change or fix request, also follow [`docs/references/change-verification-loop.md`](docs/references/change-verification-loop.md).
 
 ---
 
